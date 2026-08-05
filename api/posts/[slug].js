@@ -4,10 +4,6 @@
 import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 
-export const config = {
-  runtime: 'nodejs'
-};
-
 export default async function handler(req) {
   const url = new URL(req.url);
   const slug = url.pathname.replace('/api/posts/', '').replace('/', '');

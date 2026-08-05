@@ -5,7 +5,7 @@ import sql from '../lib/db.js';
 import { generatePost } from '../lib/generate.js';
 
 export const config = {
-  runtime: 'edge'
+  runtime: 'nodejs'
 };
 
 export default async function handler(req) {

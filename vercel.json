@@ -7,9 +7,11 @@
   ],
   "functions": {
     "api/cron.js": {
+      "runtime": "nodejs20.x",
       "maxDuration": 60
     },
     "api/posts/[slug].js": {
+      "runtime": "nodejs20.x",
       "maxDuration": 10
     }
   }

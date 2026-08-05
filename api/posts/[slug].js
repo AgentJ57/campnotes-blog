@@ -1,7 +1,8 @@
 // api/posts/[slug].js
 // Renders individual blog post pages
 
-import sql from '../../lib/db.js';
+import { neon } from '@neondatabase/serverless';
+const sql = neon(process.env.DATABASE_URL);
 
 export const config = {
   runtime: 'nodejs'

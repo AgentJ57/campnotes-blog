@@ -65,6 +65,7 @@ details p{text-align:left!important;margin:.65rem 0 0!important;max-width:none!i
 .rsvp{padding:1rem;border-radius:24px;background:linear-gradient(180deg,#ead8b9,#dcc29d);color:#2b160d;border:1px solid #a66b3d;box-shadow:0 20px 50px rgba(0,0,0,.45)}
 .rsvp h2{color:#5f2511;margin:.15rem 0 .35rem}
 .rsvp .sub{margin:0 0 1rem;color:#805538;text-align:center;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase}
+.rsvp-embed{display:block;width:100%;height:575px;border:0;border-radius:16px;background:#17100d;overflow:hidden}
 form{display:grid;gap:.8rem} label{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#6a3b22}
 input,textarea{width:100%;margin-top:.35rem;padding:.85rem .95rem;border-radius:12px;border:1px solid #ae7c54;background:rgba(255,249,239,.72);color:#27140b}
 textarea{min-height:96px;resize:vertical}
@@ -181,18 +182,13 @@ filter:blur(.7px)}
     <div class="rsvp">
       <h2>RSVP</h2>
       <div class="sub">Confirm your admission</div>
-      <form id="rsvpForm">
-        <label>Name<input id="name" required placeholder="Your name"></label>
-        <label>Best contact<input id="contact" required placeholder="Email or phone"></label>
-        <div class="row">
-          <label class="choice"><input type="radio" name="going" value="yes" checked> I’m in</label>
-          <label class="choice"><input type="radio" name="going" value="no"> Can’t make it</label>
-        </div>
-        <label>Guest name<input id="guest" placeholder="If your invite includes one"></label>
-        <label>Anything we should know?<textarea id="notes" placeholder="Questions, dietary notes, etc."></textarea></label>
-        <button class="submit" type="submit">Seal My RSVP</button>
-        <div class="thanks" id="thanks">RSVP received. The rest stays classified for now.</div>
-      </form>
+      <iframe
+        class="rsvp-embed"
+        src="https://form.jotform.com/262784902143055"
+        title="Halloween Party RSVP"
+        loading="lazy"
+        scrolling="no">
+      </iframe>
     </div>
   </section>
   <div class="footer">October 30, 2026 · 7:00 PM · Orlando Area</div>
@@ -246,7 +242,7 @@ function updateCountdown(){
   }
 }
 updateCountdown();
-document.getElementById('rsvpForm').addEventListener('submit',e=>{e.preventDefault();e.currentTarget.querySelector('.submit').style.display='none';document.getElementById('thanks').style.display='block'});
+
 </script>
 </body>
 </html>

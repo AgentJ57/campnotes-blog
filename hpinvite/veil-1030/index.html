@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>HPinvite Admin</title>
+<style>
+:root{--bg:#090706;--panel:#16100d;--ink:#ead7ba;--muted:#aa896b;--ember:#9e2b14;--line:#4b2b1e}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0,#23110c 0,#0d0907 42%,#070504 100%);color:var(--ink);font-family:Georgia,serif;display:grid;place-items:center;padding:24px}
+.card{width:min(92vw,520px);background:linear-gradient(180deg,rgba(26,17,13,.98),rgba(12,8,7,.98));border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.55)}
+h1{margin:.1rem 0 .4rem;text-align:center;text-transform:uppercase;letter-spacing:.08em}
+p{color:var(--muted);line-height:1.55}
+label{display:block;margin-top:18px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#c7a17d}
+input{width:100%;margin-top:8px;padding:14px 16px;border-radius:12px;border:1px solid #5a3323;background:#0d0907;color:#f3e2c8;font-size:16px}
+button,a.button{display:block;width:100%;margin-top:14px;padding:14px 16px;border-radius:999px;border:1px solid #7e341f;background:linear-gradient(180deg,#77210f,#3c1008);color:#f9e1bf;text-align:center;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;font-weight:700;cursor:pointer}
+.error{min-height:1.2em;margin-top:10px;color:#d77858;font-size:.9rem}
+.hidden{display:none}
+.rule{height:1px;background:linear-gradient(90deg,transparent,#6d3d29,transparent);margin:22px 0}
+.small{font-size:.82rem;color:#8f755f}
+</style>
+</head>
+<body>
+<main class="card">
+  <section id="login">
+    <h1>Restricted Archive</h1>
+    <p>This door is not marked on the map. Enter the keeper's key.</p>
+    <form id="loginForm">
+      <label for="pw">Admin key</label>
+      <input id="pw" type="password" autocomplete="current-password" required>
+      <button type="submit">Unlock the ledger</button>
+      <div class="error" id="err" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <section id="admin" class="hidden">
+    <h1>Guest Ledger</h1>
+    <p>RSVPs are stored in the secure Jotform Inbox. The detailed party coordinates are only emailed automatically to guests who confirm they are attending.</p>
+    <div class="rule"></div>
+    <a class="button" href="https://www.jotform.com/inbox/262784902143055" target="_blank" rel="noopener noreferrer">Open RSVP Inbox</a>
+    <a class="button" href="https://www.jotform.com/build/262784902143055" target="_blank" rel="noopener noreferrer">Edit RSVP Form</a>
+    <p class="small">This page is intentionally unlinked from the public invitation and marked noindex. Jotform still requires your account login before any guest data is shown.</p>
+  </section>
+</main>
+<script>
+const expected="746aab5415d167989b8db41c47e33ec7196f87298d5e446133e82f5e20f01550";
+const form=document.getElementById('loginForm');
+const pw=document.getElementById('pw');
+const err=document.getElementById('err');
+async function sha256(s){
+  const b=new TextEncoder().encode(s);
+  const h=await crypto.subtle.digest('SHA-256',b);
+  return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  err.textContent='';
+  const got=await sha256(pw.value);
+  if(got===expected){
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('admin').classList.remove('hidden');
+    pw.value='';
+  } else {
+    err.textContent='The lock refuses the key.';
+  }
+});
+</script>
+</body>
+</html>

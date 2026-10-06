@@ -182,13 +182,51 @@ filter:blur(.7px)}
     <div class="rsvp">
       <h2>RSVP</h2>
       <div class="sub">Confirm your admission</div>
-      <iframe
-        class="rsvp-embed"
-        src="https://form.jotform.com/262784902143055"
-        title="Halloween Party RSVP"
-        loading="lazy"
-        scrolling="yes">
-      </iframe>
+      <form id="rsvpForm"
+        action="https://submit.jotform.com/submit/262784902143055/"
+        method="post"
+        target="rsvpSink"
+        accept-charset="utf-8"
+        autocomplete="on">
+        <input type="hidden" name="formID" value="262784902143055">
+        <input type="hidden" name="simple_spc" value="262784902143055-262784902143055">
+        <input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
+
+        <div class="row">
+          <label>First name
+            <input type="text" name="q2_fullname0[first]" required autocomplete="given-name" placeholder="First name">
+          </label>
+          <label>Last name
+            <input type="text" name="q2_fullname0[last]" required autocomplete="family-name" placeholder="Last name">
+          </label>
+        </div>
+
+        <label>Email
+          <input type="email" name="q3_email1" required autocomplete="email" placeholder="you@example.com">
+        </label>
+
+        <div class="row">
+          <label class="choice"><input type="radio" name="q4_radio2" value="Yes" required> I’m in</label>
+          <label class="choice"><input type="radio" name="q4_radio2" value="No" required> Can’t make it</label>
+        </div>
+
+        <div class="row">
+          <label>Guest first name
+            <input type="text" name="q5_fullname3[first]" autocomplete="off" placeholder="Optional">
+          </label>
+          <label>Guest last name
+            <input type="text" name="q5_fullname3[last]" autocomplete="off" placeholder="Optional">
+          </label>
+        </div>
+
+        <label>Anything we should know?
+          <textarea name="q6_textarea4" placeholder="Questions, dietary notes, etc."></textarea>
+        </label>
+
+        <button class="submit" type="submit">Seal My RSVP</button>
+        <div class="thanks" id="thanks">RSVP received. Check your email for the coordinates if you’re joining us.</div>
+      </form>
+      <iframe name="rsvpSink" id="rsvpSink" title="RSVP submission" style="display:none"></iframe>
     </div>
   </section>
   <div class="footer">October 30, 2026 · 7:00 PM · Orlando Area</div>
@@ -242,6 +280,22 @@ function updateCountdown(){
   }
 }
 updateCountdown();
+const rsvpForm=document.getElementById('rsvpForm');
+if(rsvpForm){
+  rsvpForm.addEventListener('submit',()=>{
+    const btn=rsvpForm.querySelector('.submit');
+    if(btn){
+      btn.disabled=true;
+      btn.textContent='Sending...';
+    }
+    setTimeout(()=>{
+      if(btn) btn.style.display='none';
+      const thanks=document.getElementById('thanks');
+      if(thanks) thanks.style.display='block';
+    },1400);
+  });
+}
+
 
 </script>
 </body>

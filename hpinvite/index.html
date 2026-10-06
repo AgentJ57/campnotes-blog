@@ -65,6 +65,7 @@ details p{text-align:left!important;margin:.65rem 0 0!important;max-width:none!i
 .rsvp{padding:1rem;border-radius:24px;background:linear-gradient(180deg,#ead8b9,#dcc29d);color:#2b160d;border:1px solid #a66b3d;box-shadow:0 20px 50px rgba(0,0,0,.45)}
 .rsvp h2{color:#5f2511;margin:.15rem 0 .35rem}
 .rsvp .sub{margin:0 0 1rem;color:#805538;text-align:center;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase}
+.jotform-official{width:100%;min-height:560px;border-radius:16px;overflow:visible;background:#17100d}
 .rsvp-embed{display:block;width:100%;height:720px;border:0;border-radius:16px;background:#17100d;overflow:auto;-webkit-overflow-scrolling:touch}
 form{display:grid;gap:.8rem} label{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#6a3b22}
 input,textarea{width:100%;margin-top:.35rem;padding:.85rem .95rem;border-radius:12px;border:1px solid #ae7c54;background:rgba(255,249,239,.72);color:#27140b}
@@ -182,51 +183,9 @@ filter:blur(.7px)}
     <div class="rsvp">
       <h2>RSVP</h2>
       <div class="sub">Confirm your admission</div>
-      <form id="rsvpForm"
-        action="https://submit.jotform.com/submit/262784902143055/"
-        method="post"
-        target="rsvpSink"
-        accept-charset="utf-8"
-        autocomplete="on">
-        <input type="hidden" name="formID" value="262784902143055">
-        <input type="hidden" name="simple_spc" value="262784902143055-262784902143055">
-        <input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
-
-        <div class="row">
-          <label>First name
-            <input type="text" name="q2_fullname0[first]" required autocomplete="given-name" placeholder="First name">
-          </label>
-          <label>Last name
-            <input type="text" name="q2_fullname0[last]" required autocomplete="family-name" placeholder="Last name">
-          </label>
-        </div>
-
-        <label>Email
-          <input type="email" name="q3_email1" required autocomplete="email" placeholder="you@example.com">
-        </label>
-
-        <div class="row">
-          <label class="choice"><input type="radio" name="q4_radio2" value="Yes" required> I’m in</label>
-          <label class="choice"><input type="radio" name="q4_radio2" value="No" required> Can’t make it</label>
-        </div>
-
-        <div class="row">
-          <label>Guest first name
-            <input type="text" name="q5_fullname3[first]" autocomplete="off" placeholder="Optional">
-          </label>
-          <label>Guest last name
-            <input type="text" name="q5_fullname3[last]" autocomplete="off" placeholder="Optional">
-          </label>
-        </div>
-
-        <label>Anything we should know?
-          <textarea name="q6_textarea4" placeholder="Questions, dietary notes, etc."></textarea>
-        </label>
-
-        <button class="submit" type="submit">Seal My RSVP</button>
-        <div class="thanks" id="thanks">RSVP received. Check your email for the coordinates if you’re joining us.</div>
-      </form>
-      <iframe name="rsvpSink" id="rsvpSink" title="RSVP submission" style="display:none"></iframe>
+      <div class="jotform-official">
+        <script type="text/javascript" src="https://form.jotform.com/jsform/262784902143055"></script>
+      </div>
     </div>
   </section>
   <div class="footer">October 30, 2026 · 7:00 PM · Orlando Area</div>
@@ -280,21 +239,6 @@ function updateCountdown(){
   }
 }
 updateCountdown();
-const rsvpForm=document.getElementById('rsvpForm');
-if(rsvpForm){
-  rsvpForm.addEventListener('submit',()=>{
-    const btn=rsvpForm.querySelector('.submit');
-    if(btn){
-      btn.disabled=true;
-      btn.textContent='Sending...';
-    }
-    setTimeout(()=>{
-      if(btn) btn.style.display='none';
-      const thanks=document.getElementById('thanks');
-      if(thanks) thanks.style.display='block';
-    },1400);
-  });
-}
 
 
 </script>
